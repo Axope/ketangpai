@@ -45,8 +45,8 @@ def login(username: str, password: str) -> str:
         raise Exception(res['message'])
 
 
+# 获取本学期课程列表
 def get_course_list(semester: str, term: int) -> list:
-    # 获取本学期课程列表
     response = sess.post(
         url='https://openapiv5.ketangpai.com//CourseApi/semesterCourseList',
         json={
@@ -75,7 +75,29 @@ def get_homework(course_id: str) -> list:
             'lessonlink': [],
             'limit': 50,
             'page': 1,
-            # 'reqtimestamp': 1676384885026,
+            'sort': [],
+            'vtr_type': ""
+        }
+    )
+    res = response.json()
+    if res['status'] == 1:
+        return res['data']['list']
+    else:
+        raise Exception(res['message'])
+
+
+def get_test(course_id: str) -> list:
+    response = sess.post(
+        url='https://openapiv5.ketangpai.com//FutureV2/CourseMeans/getCourseContent',
+        json={
+            'contenttype': 6,
+            'courseid': course_id,
+            'courserole': 0,
+            'desc': 3,
+            'dirid': 0,
+            'lessonlink': [],
+            'limit': 50,
+            'page': 1,
             'sort': [],
             'vtr_type': ""
         }
@@ -88,12 +110,58 @@ def get_homework(course_id: str) -> list:
 
 
 def unix2localtime(ut) -> str:
+    # print(type(ut), ut)
+    if ut == "0":
+        return "不限"
     time_local = time.localtime(int(ut))
     return time.strftime("%Y-%m-%d %H:%M", time_local)
 
 
 def output_homework(work: dict):
     print(f"作业名称: {work['title']} \t 作业截至时间: {unix2localtime(work['endtime'])}")
+
+
+def output_test(work: dict):
+    print(f"测试名称: {work['title']} \t 测试截至时间: {unix2localtime(work['endtime'])}")
+
+
+#  打印未完成的作业
+def out_undo_homework(course_list: list):
+    for course in course_list:
+        course_name = course['coursename']
+        course_id = course['id']
+        homework_list = get_homework(course_id=course_id)
+        tmp_list = []
+        for homework in homework_list:
+            if homework['mstatus'] == 0:
+                tmp_list.append({
+                    'title': homework['title'],
+                    'endtime': homework['endtime']
+                })
+        if len(tmp_list) != 0:
+            print(course_name, '未完成作业:')
+            for do_it in tmp_list:
+                output_homework(do_it)
+
+
+#  打印未完成的测试
+def out_undo_test(course_list: list):
+    for course in course_list:
+        course_name = course['coursename']
+        course_id = course['id']
+        test_list = get_test(course_id=course_id)
+        tmp_list = []
+        for test in test_list:
+            if test['submit_state'] <= 2:
+                # print("DE#", test['over'])
+                tmp_list.append({
+                    'title': test['title'],
+                    'endtime': test['endtime']
+                })
+        if len(tmp_list) != 0:
+            print(course_name, '未完成测试:')
+            for do_it in tmp_list:
+                output_test(do_it)
 
 
 if __name__ == '__main__':
@@ -111,28 +179,5 @@ if __name__ == '__main__':
     sess.headers['token'] = tk
     # print(tk)
     course_list = get_course_list(semester=semester, term=term)
-    # print(course_list)
-    for course in course_list:
-        course_name = course['coursename']
-        course_id = course['id']
-        homework_list = get_homework(course_id=course_id)
-        # print(homework_list)
-        # tmp_dict = {
-        #     'course_name': course_name
-        # }
-        tmp_list = []
-        for homework in homework_list:
-            if homework['mstatus'] == 0:
-                # tmp_dict[''] =
-                tmp_list.append({
-                    'title': homework['title'],
-                    'endtime': homework['endtime']
-                })
-        if len(tmp_list) != 0:
-            print(course_name, ':')
-            for do_it in tmp_list:
-                output_homework(do_it)
-
-    # MDAwMDAwMDAwMLOGvd6Gqa9ohLVyoQ
-# MDAwMDAwMDAwMLOGvd6Gqa9ohLVyoQ
-# MDAwMDAwMDAwMLOGvd6GqatthLVyoQ
+    # out_undo_homework(course_list)
+    out_undo_test(course_list)
