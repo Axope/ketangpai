@@ -1,3 +1,4 @@
+# !/usr/bin/python3.10
 import json
 
 import requests
@@ -127,6 +128,7 @@ def output_test(work: dict):
 
 #  打印未完成的作业
 def out_undo_homework(course_list: list):
+    f = 0
     for course in course_list:
         course_name = course['coursename']
         course_id = course['id']
@@ -139,13 +141,17 @@ def out_undo_homework(course_list: list):
                     'endtime': homework['endtime']
                 })
         if len(tmp_list) != 0:
+            f = 1
             print(course_name, '未完成作业:')
             for do_it in tmp_list:
                 output_homework(do_it)
+    if f == 0:
+        print('作业已全部完成')
 
 
 #  打印未完成的测试
 def out_undo_test(course_list: list):
+    f = 0
     for course in course_list:
         course_name = course['coursename']
         course_id = course['id']
@@ -159,9 +165,12 @@ def out_undo_test(course_list: list):
                     'endtime': test['endtime']
                 })
         if len(tmp_list) != 0:
+            f = 1
             print(course_name, '未完成测试:')
             for do_it in tmp_list:
                 output_test(do_it)
+    if f == 0:
+        print('测试已全部完成')
 
 
 if __name__ == '__main__':
@@ -178,6 +187,7 @@ if __name__ == '__main__':
     tk = login(username=username, password=password)
     sess.headers['token'] = tk
     # print(tk)
+    print(time.strftime('%Y-%m-%d %H:%M:%S', time.localtime()))
     course_list = get_course_list(semester=semester, term=term)
-    # out_undo_homework(course_list)
+    out_undo_homework(course_list)
     out_undo_test(course_list)

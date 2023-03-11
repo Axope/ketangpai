@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="82d22c5f-e5a4-48f6-85ba-ea94cf3ea228" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +26,8 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;
   }
 }</component>
   <component name="RunManager">
@@ -36,9 +38,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="/usr/bin/python3.10" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -67,6 +69,19 @@
       <updated>1676530192210</updated>
       <workItem from="1676530193178" duration="528000" />
       <workItem from="1676530744902" duration="13000" />
+      <workItem from="1677492257803" duration="162000" />
+      <workItem from="1677570627132" duration="46000" />
+      <workItem from="1677724822748" duration="81000" />
+      <workItem from="1678029390304" duration="7000" />
+      <workItem from="1678029446213" duration="863000" />
+      <workItem from="1678031231470" duration="4000" />
+      <workItem from="1678031330510" duration="96000" />
+      <workItem from="1678089817321" duration="383000" />
+      <workItem from="1678090409869" duration="113000" />
+      <workItem from="1678090715148" duration="67000" />
+      <workItem from="1678114937850" duration="4000" />
+      <workItem from="1678451454531" duration="100000" />
+      <workItem from="1678451661058" duration="28000" />
     </task>
     <servers />
   </component>
@@ -85,6 +100,6 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ketangpai$main.coverage" NAME="main Coverage Results" MODIFIED="1676530751280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ketangpai$main.coverage" NAME="main Coverage Results" MODIFIED="1678451673234" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
