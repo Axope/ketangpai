@@ -15,16 +15,6 @@ sess.headers = {
 }
 
 
-def init_logging():
-    t = datetime.now().strftime("%Y-%m-%d")
-    f = open(f'log/{t}.log', 'w', encoding='utf-8')
-    logging.basicConfig(
-        level=logging.INFO,
-        format='[%(levelname)s,%(lineno)d]:%(message)s',
-        stream=f
-    )
-
-
 def login(username: str, password: str) -> str:
     login_form = {
         'code': '',
@@ -174,8 +164,6 @@ def out_undo_test(course_list: list):
 
 
 if __name__ == '__main__':
-    init_logging()
-
     with open('config.json', 'r', encoding='utf-8') as fp:
         config = json.loads(fp.read())
         semester = config['semester']
