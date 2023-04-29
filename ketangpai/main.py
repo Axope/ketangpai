@@ -108,11 +108,16 @@ def unix2localtime(ut) -> str:
     return time.strftime("%Y-%m-%d %H:%M", time_local)
 
 
+all_work = []
+
+
 def output_homework(work: dict):
+    all_work.append((work['title'], unix2localtime(work['endtime'])))
     print(f"作业名称: {work['title']} \t 作业截至时间: {unix2localtime(work['endtime'])}")
 
 
 def output_test(work: dict):
+    all_work.append((work['title'], unix2localtime(work['endtime'])))
     print(f"测试名称: {work['title']} \t 测试截至时间: {unix2localtime(work['endtime'])}")
 
 
@@ -159,6 +164,7 @@ def out_undo_test(course_list: list):
             print(course_name, '未完成测试:')
             for do_it in tmp_list:
                 output_test(do_it)
+                all_work.append(do_it)
     if f == 0:
         print('测试已全部完成')
 
@@ -179,3 +185,8 @@ if __name__ == '__main__':
     course_list = get_course_list(semester=semester, term=term)
     out_undo_homework(course_list)
     out_undo_test(course_list)
+    print('-----------------------------------------------------------')
+
+    all_work.sort(key=lambda x: x[1])
+    for li in all_work:
+        print(li)
